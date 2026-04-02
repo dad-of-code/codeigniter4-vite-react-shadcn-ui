@@ -1,0 +1,77 @@
+{
+  "entries": {
+    "index": {
+      "input": "src/index.tsx",
+      "access": "public",
+      "groups": [],
+      "permissions": [],
+      "files": {
+        "js": [
+          "assets/index-DAEk858i.js"
+        ],
+        "css": [
+          "assets/theme-provider-J6l72W16.css"
+        ]
+      },
+      "chunks": [],
+      "preloads": [
+        "assets/chunks/theme-provider-Bo8rjqij.js"
+      ]
+    },
+    "protected": {
+      "input": "src/protected.tsx",
+      "access": "auth",
+      "groups": [],
+      "permissions": [],
+      "files": {
+        "js": [
+          "assets/protected-DAEk858i.js"
+        ],
+        "css": [
+          "assets/theme-provider-J6l72W16.css"
+        ]
+      },
+      "chunks": [],
+      "preloads": [
+        "assets/chunks/theme-provider-Bo8rjqij.js"
+      ]
+    }
+  },
+  "fileAccess": {
+    "assets/index-DAEk858i.js": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/theme-provider-J6l72W16.css": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/geist-cyrillic-wght-normal-CHSlOQsW.woff2": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/geist-latin-ext-wght-normal-DMtmJ5ZE.woff2": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/geist-latin-wght-normal-Dm3htQBi.woff2": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/chunks/theme-provider-Bo8rjqij.js": {
+      "access": "public",
+      "groups": [],
+      "permissions": []
+    },
+    "assets/protected-DAEk858i.js": {
+      "access": "auth",
+      "groups": [],
+      "permissions": []
+    }
+  }
+}

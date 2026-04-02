@@ -1,0 +1,48 @@
+{
+  "_theme-provider-Bo8rjqij.js": {
+    "file": "assets/chunks/theme-provider-Bo8rjqij.js",
+    "name": "theme-provider",
+    "css": [
+      "assets/theme-provider-J6l72W16.css"
+    ],
+    "assets": [
+      "assets/geist-cyrillic-wght-normal-CHSlOQsW.woff2",
+      "assets/geist-latin-ext-wght-normal-DMtmJ5ZE.woff2",
+      "assets/geist-latin-wght-normal-Dm3htQBi.woff2"
+    ]
+  },
+  "_theme-provider-J6l72W16.css": {
+    "file": "assets/theme-provider-J6l72W16.css",
+    "src": "_theme-provider-J6l72W16.css"
+  },
+  "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2": {
+    "file": "assets/geist-cyrillic-wght-normal-CHSlOQsW.woff2",
+    "src": "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-cyrillic-wght-normal.woff2"
+  },
+  "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-latin-ext-wght-normal.woff2": {
+    "file": "assets/geist-latin-ext-wght-normal-DMtmJ5ZE.woff2",
+    "src": "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-latin-ext-wght-normal.woff2"
+  },
+  "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2": {
+    "file": "assets/geist-latin-wght-normal-Dm3htQBi.woff2",
+    "src": "node_modules/.pnpm/@fontsource-variable+geist@5.2.8/node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2"
+  },
+  "src/index.tsx": {
+    "file": "assets/index-DAEk858i.js",
+    "name": "index",
+    "src": "src/index.tsx",
+    "isEntry": true,
+    "imports": [
+      "_theme-provider-Bo8rjqij.js"
+    ]
+  },
+  "src/protected.tsx": {
+    "file": "assets/protected-DAEk858i.js",
+    "name": "protected",
+    "src": "src/protected.tsx",
+    "isEntry": true,
+    "imports": [
+      "_theme-provider-Bo8rjqij.js"
+    ]
+  }
+}
