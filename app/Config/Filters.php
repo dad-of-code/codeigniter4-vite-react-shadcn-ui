@@ -109,9 +109,21 @@ class Filters extends BaseFilters
      * @var array<string, array<string, list<string>>>
      */
     public array $filters = [
-        // Protected React SPA routes require authentication
-        'session' => ['before' => ['app', 'app/*']],
         // Vite asset access control (checks ci-manifest.json per-chunk rules)
         'viteAsset' => ['before' => ['build/*']],
     ];
+
+    /**
+     * Conditionally register Shield's session filter on protected routes.
+     * Until the user configures a database and enables Shield in App config,
+     * these routes remain accessible without authentication.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (config('App')->shieldEnabled) {
+            $this->filters['session'] = ['before' => ['app', 'app/*']];
+        }
+    }
 }

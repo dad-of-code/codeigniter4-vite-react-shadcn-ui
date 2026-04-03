@@ -30,6 +30,7 @@
         || str_contains(ci_vite_js($entry ?? 'index'), '<script');
 ?>
 <?php if ($viteReady): ?>
+    <script>window.__CI4__={shieldEnabled:<?= config('App')->shieldEnabled ? 'true' : 'false' ?>};</script>
     <div id="root"></div>
     <?= $this->renderSection('beforeScripts') ?>
     <?= ci_vite_js($entry ?? 'index') ?>

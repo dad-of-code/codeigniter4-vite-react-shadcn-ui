@@ -26,6 +26,10 @@
 # app.forceGlobalSecureRequests = false
 # app.CSPEnabled = false
 
+# Enable Shield authentication (requires a configured database).
+# Set to true after running: php spark migrate --all
+# app.shieldEnabled = false
+
 #--------------------------------------------------------------------
 # DATABASE
 #--------------------------------------------------------------------

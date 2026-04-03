@@ -43,8 +43,8 @@ class AssetController extends BaseController
         $vite   = new ViteAssets($config);
         $access = $vite->fileAccess($relativePath);
 
-        if ($access !== null && $access['access'] !== 'public') {
-            // Require authentication
+        if ($access !== null && $access['access'] !== 'public' && config('App')->shieldEnabled) {
+            // Require authentication (Shield must be enabled and DB configured)
             $auth = service('auth');
             if (! $auth->loggedIn()) {
                 return $this->response->setStatusCode(403);

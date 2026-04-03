@@ -1,5 +1,54 @@
 import { Button } from "@/components/ui/button"
 
+declare global {
+  interface Window {
+    __CI4__?: { shieldEnabled: boolean }
+  }
+}
+
+function ShieldBanner() {
+  const enabled = window.__CI4__?.shieldEnabled ?? false
+
+  return (
+    <div
+      className={`w-full rounded-lg border px-4 py-3 text-xs ${
+        enabled
+          ? "border-emerald-800 bg-emerald-950/50 text-emerald-300"
+          : "border-amber-800 bg-amber-950/50 text-amber-300"
+      }`}
+    >
+      <div className="flex items-center gap-2">
+        <span
+          className={`inline-block size-2 rounded-full ${
+            enabled ? "bg-emerald-400" : "bg-amber-400"
+          }`}
+        />
+        <span className="font-semibold">
+          Shield Auth: {enabled ? "Enabled" : "Disabled"}
+        </span>
+      </div>
+      {!enabled && (
+        <div className="mt-2 space-y-1 text-amber-300/80">
+          <p>Authentication is not active yet. To enable Shield:</p>
+          <ol className="list-inside list-decimal space-y-0.5 pl-1 font-mono text-[11px]">
+            <li>Configure your database in <code className="rounded bg-amber-900/40 px-1">.env</code></li>
+            <li>
+              Run migrations:{" "}
+              <code className="rounded bg-amber-900/40 px-1">php spark migrate --all</code>
+            </li>
+            <li>
+              Set{" "}
+              <code className="rounded bg-amber-900/40 px-1">app.shieldEnabled = true</code>{" "}
+              in <code className="rounded bg-amber-900/40 px-1">.env</code>
+            </li>
+            <li>Restart the PHP server</li>
+          </ol>
+        </div>
+      )}
+    </div>
+  )
+}
+
 function CodeIgniterLogo({ className }: { className?: string }) {
   return (
     <svg
@@ -112,6 +161,9 @@ export function App() {
             shadcn/ui
           </p>
         </div>
+
+        {/* Shield status */}
+        <ShieldBanner />
 
         {/* Quick-start cards */}
         <div className="grid w-full gap-3 sm:grid-cols-2">

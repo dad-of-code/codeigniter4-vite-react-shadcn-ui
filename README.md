@@ -8,31 +8,106 @@ A full-stack starter that pairs **CodeIgniter 4** (PHP backend + Shield auth) wi
 - **Automatic chunk-level access control** — the Vite plugin generates a `ci-manifest.json` mapping every output file to its access rule; the CI4 `AssetController` enforces it using Shield
 - **Dev mode with HMR** — a `hot` file tells CI4 to load scripts from the Vite dev server
 - **Spark commands** — `vite:build`, `vite:manifest`, `vite:dev` for build automation
+- **Shield-ready but DB-optional** — Shield is disabled by default so the app runs immediately without a database; enable it when you're ready
 - **shadcn/ui** components pre-configured (Radix primitives, Tailwind CSS v4, dark mode)
-- **CodeIgniter Shield** authentication baked in (session, tokens, HMAC)
 
 ## Requirements
 
 - PHP 8.2+ with [intl](http://php.net/manual/en/intl.requirements.php) and [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [Composer](https://getcomposer.org/)
-- Node.js 18+ and [pnpm](https://pnpm.io/)
+- Node.js 18+ and a package manager ([pnpm](https://pnpm.io/), npm, or yarn)
 
 ## Installation
 
-```bash
-# Clone the repo
-git clone <repo-url> my-app && cd my-app
+### Quick Start (clone + setup command)
 
-# Install PHP dependencies
+```bash
+git clone https://github.com/dad-of-code/codeigniter4-vite-react-starterapp.git my-app
+cd my-app
+
+composer install
+php spark app:setup
+```
+
+The `app:setup` command handles everything automatically:
+- Copies `env` → `.env` and sets `CI_ENVIRONMENT = development`
+- Generates an encryption key
+- Detects your JS package manager (pnpm/npm/yarn), installs Node dependencies, and runs the production build
+
+After setup, start developing:
+
+```bash
+# Terminal 1
+php spark serve
+
+# Terminal 2
+pnpm run dev
+```
+
+Open **http://localhost:8080** — CI4 serves the HTML, Vite provides HMR.
+
+### Manual Step-by-Step
+
+If you prefer to run each step yourself:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/dad-of-code/codeigniter4-vite-react-starterapp.git my-app
+cd my-app
+
+# 2. Install PHP dependencies
 composer install
 
-# Install Node dependencies
+# 3. Create your environment file
+cp env .env
+
+# 4. Set development mode — uncomment and change the value in .env:
+#    CI_ENVIRONMENT = development
+
+# 5. Generate an encryption key
+php spark key:generate
+
+# 6. Install Node dependencies
 pnpm install
 
-# Copy the environment file
-cp env .env
-# Edit .env — set app.baseURL, database credentials, etc.
+# 7. Build the frontend (or skip this and use dev mode)
+pnpm run build
 ```
+
+### Downloading as ZIP (No Git)
+
+1. Download the repository as a ZIP from GitHub and extract it
+2. Open a terminal in the extracted folder
+3. Run `composer install`
+4. Run `php spark app:setup`
+
+## Enabling Shield Authentication
+
+Shield is **disabled by default** so the app works without a database. The landing page shows the current status. When you're ready for authentication:
+
+1. **Configure your database** in `.env`:
+   ```ini
+   database.default.hostname = localhost
+   database.default.database = your_db
+   database.default.username = root
+   database.default.password = secret
+   database.default.DBDriver = MySQLi
+   database.default.port = 3306
+   ```
+
+2. **Run migrations** to create the auth tables:
+   ```bash
+   php spark migrate --all
+   ```
+
+3. **Enable Shield** — add this line to `.env`:
+   ```ini
+   app.shieldEnabled = true
+   ```
+
+4. **Restart the PHP server** — the landing page will show a green "Shield Auth: Enabled" indicator.
+
+Once enabled, `/app` routes require authentication, the `AssetController` enforces per-chunk access rules, and Shield's login/register routes become active.
 
 ## Project Structure
 
@@ -218,9 +293,13 @@ Shared chunks used by both public and protected entries are automatically marked
 | URL | Controller | Auth | Description |
 |---|---|---|---|
 | `/` | `Home::index` | No | Public React SPA |
-| `/app`, `/app/*` | `Home::app` | Session | Authenticated React SPA |
-| `/build/*` | `AssetController::serve` | Per-file | Built assets with MIME + access control |
-| `/login`, `/register`, etc. | Shield | — | Shield auth routes |
+| `/app`, `/app/*` | `Home::app` | Session\* | Authenticated React SPA |
+| `/build/*` | `AssetController::serve` | Per-file\* | Built assets with MIME + access control |
+| `/api/health` | `ApiController::health` | No | Health check endpoint |
+| `/api/user` | `ApiController::user` | Session\* | Current user info |
+| `/login`, `/register`, etc. | Shield | —\* | Shield auth routes |
+
+\* Auth enforcement is only active when `app.shieldEnabled = true` in `.env`.
 
 ## Configuration
 
@@ -251,6 +330,8 @@ Shared chunks used by both public and protected entries are automatically marked
 
 | Command | Description |
 |---|---|
+| `php spark app:setup` | First-time project setup (env, key, deps, build) |
+| `php spark app:setup --no-frontend` | Setup without Node install or build |
 | `php spark vite:dev` | Start both dev servers |
 | `php spark vite:build` | Build + validate manifest |
 | `php spark vite:manifest` | Inspect entries and file rules |

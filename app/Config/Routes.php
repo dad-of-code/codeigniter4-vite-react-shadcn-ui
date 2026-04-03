@@ -23,6 +23,11 @@ $routes->get('build/(:any)', 'AssetController::serve/$1');
 $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($routes) {
     // Health check — GET /api/health
     $routes->get('health', 'ApiController::health');
+});
+
+if (config('App')->shieldEnabled) {
+
+    service('auth')->routes($routes);
 
     // Protected API routes (require authentication)
     $routes->group('', ['filter' => 'session'], static function ($routes) {
@@ -32,7 +37,4 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
         // Add your authenticated API routes here:
         // $routes->resource('posts', ['controller' => 'PostsController']);
     });
-});
-
-// ── Shield auth routes ──
-service('auth')->routes($routes);
+}

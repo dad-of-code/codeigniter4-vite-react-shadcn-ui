@@ -43,6 +43,11 @@ class ViteAssetFilter implements FilterInterface
             return;
         }
 
+        // Shield not enabled yet — skip auth checks
+        if (! config('App')->shieldEnabled) {
+            return;
+        }
+
         $auth = service('auth');
         if (! $auth->loggedIn()) {
             return service('response')->setStatusCode(403);

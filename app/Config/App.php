@@ -199,4 +199,15 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    /**
+     * --------------------------------------------------------------------------
+     * CodeIgniter4 Shield Authentication
+     * --------------------------------------------------------------------------
+     *
+     * If true, the project is set up to use CodeIgniter4 Shield for authentication.
+     * This doesn't do anything on its own, but controllers and views can check
+     * this flag to conditionally enable auth features.
+     */
+    public bool $shieldEnabled = false;
 }
