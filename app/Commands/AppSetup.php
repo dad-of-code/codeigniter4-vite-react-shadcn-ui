@@ -230,10 +230,7 @@ class AppSetup extends BaseCommand
         CLI::write("  {$step}. Configure your database in .env", 'white');
         $step++;
 
-        CLI::write("  {$step}. Run migrations:  php spark migrate --all", 'white');
-        $step++;
-
-        CLI::write("  {$step}. Enable Shield auth:  set app.shieldEnabled = true in .env", 'white');
+        CLI::write("  {$step}. Enable Shield auth:  php spark shield:install", 'white');
         $step++;
 
         if ($skippedFrontend) {

@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 
 // ── Public React SPA (login, landing, etc.) ──
 $routes->get('/', 'Home::index');
+$routes->get('demo/(:any)', 'Home::index');
 
 // ── Authenticated React SPA (dashboard, settings, etc.) ──
 // Catches /app and /app/anything so React Router handles sub-routes.
@@ -25,13 +26,21 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], static function ($
     $routes->get('health', 'ApiController::health');
 });
 
+// ── Modular Route Files ──
+// Each module registers its own routes from app/Routes/
+\App\Routes\Dashboard\DashboardRoutes::registerRoutes($routes);
+
 if (config('App')->shieldEnabled) {
 
+    // Shield's built-in routes (login/register views for non-SPA fallback)
     service('auth')->routes($routes);
 
+    // ── Auth API (JSON) — registered from route file ──
+    \App\Routes\Auth\AuthRoutes::registerRoutes($routes);
+
     // Protected API routes (require authentication)
-    $routes->group('', ['filter' => 'session'], static function ($routes) {
-        // GET /api/user — current user info
+    $routes->group('api', ['namespace' => 'App\Controllers\Api', 'filter' => 'session'], static function ($routes) {
+        // GET /api/user — current user info (legacy, prefer /api/auth/user)
         $routes->get('user', 'ApiController::user');
 
         // Add your authenticated API routes here:

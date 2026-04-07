@@ -7,15 +7,15 @@
       "permissions": [],
       "files": {
         "js": [
-          "assets/index-DAEk858i.js"
+          "assets/index-BVAA6_Np.js"
         ],
         "css": [
-          "assets/theme-provider-J6l72W16.css"
+          "assets/theme-provider-DriJu-_n.css"
         ]
       },
       "chunks": [],
       "preloads": [
-        "assets/chunks/theme-provider-Bo8rjqij.js"
+        "assets/chunks/theme-provider-BhZLAN4v.js"
       ]
     },
     "protected": {
@@ -25,25 +25,25 @@
       "permissions": [],
       "files": {
         "js": [
-          "assets/protected-DAEk858i.js"
+          "assets/protected-BKdqxRm2.js"
         ],
         "css": [
-          "assets/theme-provider-J6l72W16.css"
+          "assets/theme-provider-DriJu-_n.css"
         ]
       },
       "chunks": [],
       "preloads": [
-        "assets/chunks/theme-provider-Bo8rjqij.js"
+        "assets/chunks/theme-provider-BhZLAN4v.js"
       ]
     }
   },
   "fileAccess": {
-    "assets/index-DAEk858i.js": {
+    "assets/index-BVAA6_Np.js": {
       "access": "public",
       "groups": [],
       "permissions": []
     },
-    "assets/theme-provider-J6l72W16.css": {
+    "assets/theme-provider-DriJu-_n.css": {
       "access": "public",
       "groups": [],
       "permissions": []
@@ -63,12 +63,12 @@
       "groups": [],
       "permissions": []
     },
-    "assets/chunks/theme-provider-Bo8rjqij.js": {
+    "assets/chunks/theme-provider-BhZLAN4v.js": {
       "access": "public",
       "groups": [],
       "permissions": []
     },
-    "assets/protected-DAEk858i.js": {
+    "assets/protected-BKdqxRm2.js": {
       "access": "auth",
       "groups": [],
       "permissions": []
